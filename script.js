@@ -2,6 +2,27 @@
 const display = document.querySelector(".display");
 
 function appendToDisplay(value) {
+	let operands = display.value.split(/[-+*/]/);
+	let lastChar = display.value.slice(-1);
+
+	if (display.value === "" && value === ".") {
+		return;
+	}
+
+	if (isNaN(value) && value !== ".") {
+		calculate();
+	}
+
+	if (typeof Number(lastChar) !== "number" && value === ".") {
+		return;
+	}
+
+	if (typeof Number(lastChar) === "number" && value === ".") {
+		if (operands[operands.length - 1].includes(".")) {
+			return;
+		}
+	}
+
 	display.value += value;
 }
 
